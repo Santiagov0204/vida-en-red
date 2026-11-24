@@ -1,0 +1,84 @@
+<main class="contenedor">
+  <header class="encabezado">
+    <img
+      src="VER.png"
+      alt="Vida en Red — Conectados por la vida"
+      class="logo-principal" />
+
+    <div class="info-encabezado">
+      <p class="frase-principal">
+        «Una señal de alerta, una red que te sostiene.»
+      </p>
+
+      <span class="badge-ciudad">
+        Ibagué · Tamizaje preventivo 100% anónimo
+      </span>
+      <a routerLink="/acceso" style="margin-top: 0.7rem; font-size: 0.88rem; color: #164e78; font-weight: 600; text-decoration: none;">
+        Ingresar a mi espacio personal →
+      </a>
+    </div>
+  </header>
+
+  @if (!resultado()) {
+    <section class="tarjeta">
+      <p class="instruccion">Durante las <strong>últimas 2 semanas</strong>, ¿con qué frecuencia te han afectado los siguientes aspectos?</p>
+
+      @for (pregunta of preguntas; track pregunta; let i = $index) {
+        <div class="bloque-pregunta">
+          <p class="texto-pregunta">{{ pregunta }}</p>
+          <div class="grupo-opciones">
+            @for (op of opciones; track op.puntos) {
+              <button
+                type="button"
+                class="btn-opcion"
+                [class.seleccionado]="respuestas()[i] === op.puntos"
+                (click)="seleccionarOpcion(i, op.puntos)">
+                {{ op.texto }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+
+      @if (error()) {
+        <div class="alerta-error">{{ error() }}</div>
+      }
+
+      <button
+        class="btn-enviar"
+        [disabled]="!todasRespondidas() || cargando()"
+        (click)="enviarTest()">
+        {{ cargando() ? 'Analizando resultados...' : 'Evaluar mi bienestar' }}
+      </button>
+    </section>
+  } @else {
+    <section class="tarjeta resultado">
+      <span class="etiqueta-riesgo" [class]="resultado()!.nivelRiesgo.toLowerCase()">
+        Nivel de Riesgo: {{ resultado()!.nivelRiesgo }}
+      </span>
+
+      <h2>Puntaje obtenido: {{ resultado()!.puntuacionTotal }} / 15</h2>
+      <p class="detalle-db">Registro anónimo #{{ resultado()!.id }} guardado en {{ resultado()!.ciudad }}</p>
+
+      <div class="rutas-atencion">
+        <h3>Rutas de Atención y Apoyo en Ibagué</h3>
+        <ul>
+          <li><strong>Línea 123:</strong> Emergencias médicas, psicológicas y atención inmediata 24/7.</li>
+          <li><strong>Línea 106:</strong> Orientación en salud mental y escucha activa del Tolima.</li>
+          <li><strong>Urgencias USI Ibagué:</strong> Atención presencial prioritaria en las sedes de la Unidad de Salud de Ibagué.</li>
+        </ul>
+      </div>
+
+      <button class="btn-secundario" (click)="reiniciar()">Realizar otra evaluación</button>
+    </section>
+  }
+
+  @if (totalComunidad() > 0) {
+    <footer class="banner-comunidad">
+      <p>
+        No estás solo(a): ya somos <strong>{{ totalComunidad() }}</strong>
+        {{ totalComunidad() === 1 ? 'persona' : 'personas' }} en Ibagué cuidando nuestro bienestar juntos.
+      </p>
+    </footer>
+  }
+</main>

@@ -1,0 +1,82 @@
+<main class="contenedor">
+  <header class="encabezado">
+    <img
+      src="VER.png"
+      alt="Vida en Red — Conectados por la vida"
+      class="logo-principal" />
+
+    <div class="info-encabezado">
+      <p class="frase-principal">
+        «Una señal de alerta, una red que te sostiene.»
+      </p>
+
+      <span class="badge-ciudad">
+        Ibagué · Panel de Monitoreo Comunitario
+      </span>
+    </div>
+  </header>
+
+  <section class="tarjeta">
+    <div class="cabecera-panel">
+      <div>
+        <h2>Estadísticas y Registros</h2>
+        <a routerLink="/" class="enlace-volver">← Volver al tamizaje público</a>
+      </div>
+      <button type="button" class="btn-refrescar" (click)="cargarHistorial()">Actualizar</button>
+    </div>
+
+    <div class="grid-kpis">
+      <div class="kpi-card total">
+        <span class="kpi-numero">{{ estadisticas().total }}</span>
+        <span class="kpi-titulo">Total Evaluaciones</span>
+      </div>
+      <div class="kpi-card bajo">
+        <span class="kpi-numero">{{ estadisticas().bajo }}</span>
+        <span class="kpi-titulo">Riesgo Bajo</span>
+      </div>
+      <div class="kpi-card medio">
+        <span class="kpi-numero">{{ estadisticas().medio }}</span>
+        <span class="kpi-titulo">Riesgo Medio</span>
+      </div>
+      <div class="kpi-card alto">
+        <span class="kpi-numero">{{ estadisticas().alto }}</span>
+        <span class="kpi-titulo">Riesgo Alto</span>
+      </div>
+    </div>
+
+    @if (cargandoHistorial()) {
+      <p class="mensaje-tabla">Consultando registros en PostgreSQL...</p>
+    } @else if (historial().length === 0) {
+      <p class="mensaje-tabla">Aún no hay evaluaciones registradas.</p>
+    } @else {
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Ciudad</th>
+              <th>Puntaje</th>
+              <th>Nivel de Riesgo</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of historial(); track item.id) {
+              <tr>
+                <td>#{{ item.id }}</td>
+                <td>{{ item.ciudad }}</td>
+                <td><strong>{{ item.puntuacionTotal }}</strong> / 15</td>
+                <td>
+                  <span class="badge" [class]="item.nivelRiesgo.toLowerCase()">
+                    {{ item.nivelRiesgo }}
+                  </span>
+                </td>
+                <td>{{ item.fechaCreacion | date:'dd/MM/yyyy HH:mm' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</main>

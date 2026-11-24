@@ -1,0 +1,254 @@
+/* --- ESTILOS ORIGINALES DEL TAMIZAJE --- */
+.contenedor {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #1e293b;
+}
+
+.encabezado {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.encabezado h1 {
+  color: #0f766e;
+  margin-bottom: 0.4rem;
+}
+
+.tarjeta {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.instruccion {
+  background: #f0fdfa;
+  padding: 0.9rem;
+  border-left: 4px solid #0f766e;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.bloque-pregunta {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.texto-pregunta {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.grupo-opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.btn-opcion {
+  padding: 0.65rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-opcion:hover {
+  border-color: #0f766e;
+}
+
+.btn-opcion.seleccionado {
+  background: #0f766e;
+  color: #ffffff;
+  border-color: #0f766e;
+  font-weight: 600;
+}
+
+.btn-enviar {
+  width: 100%;
+  padding: 1rem;
+  background: #0f766e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-enviar:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.alerta-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.resultado {
+  text-align: center;
+}
+
+.etiqueta-riesgo {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.etiqueta-riesgo.bajo { background: #dcfce7; color: #166534; }
+.etiqueta-riesgo.medio { background: #fef9c3; color: #854d0e; }
+.etiqueta-riesgo.alto { background: #fee2e2; color: #991b1b; }
+
+.detalle-db {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.rutas-atencion {
+  text-align: left;
+  background: #f8fafc;
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.rutas-atencion ul {
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.btn-secundario {
+  padding: 0.8rem 1.5rem;
+  background: #e2e8f0;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --- ESTILOS DEL PANEL DE RESULTADOS Y PESTAÑAS --- */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.tab-btn {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.activa {
+  background: #0f766e;
+  color: #ffffff;
+  border-color: #0f766e;
+}
+
+.cabecera-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.cabecera-panel h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.btn-refrescar {
+  padding: 0.45rem 0.9rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.grid-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+}
+
+.kpi-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.kpi-numero {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.kpi-titulo {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.kpi-card.bajo { border-bottom: 4px solid #16a34a; }
+.kpi-card.medio { border-bottom: 4px solid #ca8a04; }
+.kpi-card.alto { border-bottom: 4px solid #dc2626; }
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge.bajo { background: #dcfce7; color: #166534; }
+.badge.medio { background: #fef9c3; color: #854d0e; }
+.badge.alto { background: #fee2e2; color: #991b1b; }
+
+.mensaje-tabla {
+  text-align: center;
+  color: #64748b;
+  padding: 1.5rem 0;
+}

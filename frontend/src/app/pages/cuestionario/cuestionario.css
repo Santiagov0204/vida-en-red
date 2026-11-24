@@ -1,0 +1,211 @@
+.contenedor {
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    color: #10375c;
+  }
+  
+  .encabezado {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    text-align: left;
+    margin-bottom: 1.8rem;
+    padding: 0 0.4rem;
+  }
+  
+  .logo-principal {
+    width: 165px;
+    flex-shrink: 0; /* Impide que el navegador encoja el logo */
+    height: auto;
+    mix-blend-mode: multiply;
+  }
+  
+  .info-encabezado {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .frase-principal {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #1b6b7a;
+    margin: 0 0 0.85rem 0;
+    line-height: 1.4;
+  }
+  
+  /* Diseño responsivo: en celulares vuelve a centrarse para que no se apriete */
+  @media (max-width: 560px) {
+    .encabezado {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+  
+    .info-encabezado {
+      align-items: center;
+    }
+  }
+  
+  .badge-ciudad {
+    display: inline-block;
+    background: #e3f4f1;
+    color: #135d66;
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #bce3dc;
+  }
+  
+  .tarjeta {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 8px 28px rgba(16, 55, 92, 0.06);
+    border: 1px solid rgba(29, 138, 153, 0.12);
+  }
+  
+  .instruccion {
+    background: #f0f9f8;
+    padding: 0.95rem 1.1rem;
+    border-left: 4px solid #2391a8;
+    border-radius: 8px;
+    margin-bottom: 1.6rem;
+    color: #10375c;
+  }
+  
+  .bloque-pregunta {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.3rem;
+    border-bottom: 1px solid #e6eceb;
+  }
+  
+  .texto-pregunta {
+    font-weight: 600;
+    margin-bottom: 0.85rem;
+    line-height: 1.45;
+  }
+  
+  .grupo-opciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.55rem;
+  }
+  
+  .btn-opcion {
+    padding: 0.7rem;
+    border: 1px solid #cbd9dc;
+    background: #f9fbfb;
+    color: #10375c;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-opcion:hover {
+    border-color: #2391a8;
+    background: #f0f9f8;
+  }
+  
+  .btn-opcion.seleccionado {
+    background: linear-gradient(135deg, #164e78 0%, #2391a8 100%);
+    color: #ffffff;
+    border-color: transparent;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(35, 145, 168, 0.25);
+  }
+  
+  .btn-enviar {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #164e78 0%, #2aa39c 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.2s;
+  }
+  
+  .btn-enviar:hover:not(:disabled) {
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+  
+  .btn-enviar:disabled {
+    background: #a3b5bc;
+    cursor: not-allowed;
+  }
+  
+  .alerta-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    padding: 0.8rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .resultado {
+    text-align: center;
+  }
+  
+  .etiqueta-riesgo {
+    display: inline-block;
+    padding: 0.5rem 1.3rem;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .etiqueta-riesgo.bajo { background: #dcfce7; color: #166534; }
+  .etiqueta-riesgo.medio { background: #fef9c3; color: #854d0e; }
+  .etiqueta-riesgo.alto { background: #fee2e2; color: #991b1b; }
+  
+  .detalle-db {
+    color: #5c7684;
+    font-size: 0.9rem;
+  }
+  
+  .rutas-atencion {
+    text-align: left;
+    background: #f4f9f9;
+    padding: 1.3rem;
+    border-radius: 12px;
+    border: 1px solid #d5ece9;
+    margin: 1.5rem 0;
+  }
+  
+  .rutas-atencion h3 {
+    margin-top: 0;
+    color: #10375c;
+  }
+  
+  .rutas-atencion ul {
+    padding-left: 1.2rem;
+    line-height: 1.65;
+  }
+  
+  .btn-secundario {
+    padding: 0.8rem 1.6rem;
+    background: #e3ecee;
+    color: #10375c;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .banner-comunidad {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: #e6f4f2;
+    border: 1px solid #bce3dc;
+    border-radius: 14px;
+    text-align: center;
+    color: #135d66;
+    font-size: 0.95rem;
+  }

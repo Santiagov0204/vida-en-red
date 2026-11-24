@@ -1,0 +1,263 @@
+<main class="contenedor">
+    <header class="encabezado-perfil">
+      <div class="identidad-usuario">
+        <div class="avatar-circulo">
+          {{ authService.usuarioActual()?.fotoPerfil === 'avatar-default' ? '🌿' : authService.usuarioActual()?.fotoPerfil }}
+        </div>
+        <div>
+          <span class="saludo-tag">Espacio personal · Vida en Red</span>
+          <h1>Hola, {{ authService.usuarioActual()?.nombre }}</h1>
+          <p class="sub-info">{{ authService.usuarioActual()?.correo }} · Tel: {{ authService.usuarioActual()?.telefono || 'Sin registrar' }}</p>
+        </div>
+      </div>
+  
+      <div class="acciones-header">
+        <a routerLink="/" class="btn-outline">Inicio</a>
+        <button type="button" class="btn-salir" (click)="salir()">Cerrar sesión</button>
+      </div>
+    </header>
+  
+    <nav class="nav-perfil">
+      <button type="button" [class.activa]="pestana() === 'bienestar'" (click)="pestana.set('bienestar')">
+        Mi Bienestar y Encuesta
+      </button>
+      <button type="button" [class.activa]="pestana() === 'historial'" (click)="pestana.set('historial')">
+        Mi Historial ({{ misEvaluaciones().length }})
+      </button>
+      <button type="button" [class.activa]="pestana() === 'ajustes'" (click)="pestana.set('ajustes')">
+        Editar Perfil
+      </button>
+    </nav>
+  
+    @if (pestana() === 'bienestar') {
+      <!-- Tarjeta de frase motivadora -->
+      <section class="tarjeta tarjeta-frase">
+        <div class="frase-contenido">
+          <span class="etiqueta-suave">Recordatorio del día</span>
+          <p class="texto-frase">{{ frases[indiceFrase()] }}</p>
+        </div>
+        <button type="button" class="btn-refrescar" (click)="siguienteFrase()">Otra frase ↻</button>
+      </section>
+  
+      <!-- Encuesta vinculada al perfil -->
+      <section class="tarjeta">
+        <h2>Chequeo emocional de hoy</h2>
+  
+        @if (!yaEvaluoHoy()) {
+          <p class="descripcion-seccion">Puedes realizar un chequeo diario. Tus resultados se guardan en tu historial privado.</p>
+  
+          @for (pregunta of preguntas; track pregunta; let i = $index) {
+            <div class="bloque-pregunta">
+              <p class="texto-pregunta">{{ pregunta }}</p>
+              <div class="grupo-opciones">
+                @for (op of opciones; track op.puntos) {
+                  <button
+                    type="button"
+                    class="btn-opcion"
+                    [class.seleccionado]="respuestas()[i] === op.puntos"
+                    (click)="seleccionarOpcion(i, op.puntos)">
+                    {{ op.texto }}
+                  </button>
+                }
+              </div>
+            </div>
+          }
+  
+          <button
+            type="button"
+            class="btn-enviar"
+            [disabled]="!todasRespondidas() || enviandoTest()"
+            (click)="enviarEncuestaPersonal()">
+            {{ enviandoTest() ? 'Guardando en tu historial...' : 'Guardar mi evaluación de hoy' }}
+          </button>
+        } @else {
+          @if (resultadoReciente()) {
+            <div class="resultado-box" style="margin-bottom: 1.2rem;">
+              <span class="badge-riesgo" [class]="resultadoReciente()!.nivelRiesgo.toLowerCase()">
+                Resultado de hoy: {{ resultadoReciente()!.nivelRiesgo }} ({{ resultadoReciente()!.puntuacionTotal }} / 15)
+              </span>
+              <p style="margin-bottom: 0;">Tu chequeo diario ya quedó guardado en tu historial.</p>
+            </div>
+          }
+  
+          <div class="caja-condicional-sos">
+            <div class="icono-alerta">💛</div>
+            <h3>Ya realizaste tu encuesta de hoy</h3>
+            <p>Para cuidar tu bienestar sin saturarte, permitimos una evaluación al día. Pero queremos asegurarnos de que estés bien:</p>
+            <p class="pregunta-condicional"><strong>¿Sientes que necesitas llenar la encuesta de nuevo o hablar con alguien ahora mismo?</strong></p>
+  
+            @if (!respuestaTranquilidad()) {
+              <div class="botones-sos">
+                <button type="button" class="btn-sos-si" (click)="dispararAlarmaSos()">
+                  Sí, necesito hablar con alguien
+                </button>
+                <button type="button" class="btn-sos-no" (click)="respuestaTranquilidad.set(true)">
+                  No, estoy bien por hoy
+                </button>
+              </div>
+            } @else {
+              <p class="mensaje-calma">Nos alegra saberlo. Recuerda que esta red sigue abierta para ti cuando la necesites.</p>
+            }
+          </div>
+        }
+      </section>
+  
+      <!-- Recursos y líneas de atención -->
+      <div class="grid-dos-columnas">
+        <section class="tarjeta">
+          <h3>Lecturas y herramientas</h3>
+          <div class="lista-articulos">
+            @for (art of articulos; track art.titulo) {
+              <article class="item-articulo">
+                <span class="tiempo-lectura">{{ art.lectura }}</span>
+                <h4>{{ art.titulo }}</h4>
+                <p>{{ art.resumen }}</p>
+                <a [href]="art.url" target="_blank" rel="noopener">Leer recurso →</a>
+              </article>
+            }
+          </div>
+        </section>
+  
+        <section class="tarjeta tarjeta-lineas">
+          <h3>Red de Apoyo en Ibagué</h3>
+          <p class="descripcion-seccion">No tienes que atravesar momentos difíciles sin compañía:</p>
+          <ul class="lista-lineas">
+            <li>
+              <strong>Línea 106 (Tolima)</strong>
+              <span>Escucha activa, orientación psicológica gratuita 24/7.</span>
+            </li>
+            <li>
+              <strong>Línea 123</strong>
+              <span>Atención inmediata de emergencias médicas y salud mental.</span>
+            </li>
+            <li>
+              <strong>Urgencias USI Ibagué</strong>
+              <span>Atención presencial prioritaria en sedes San Francisco, Jordán y Salado.</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    }
+  
+    @if (pestana() === 'historial') {
+      <section class="tarjeta">
+        <h2>Tu evolución emocional</h2>
+        <p class="descripcion-seccion">Registro privado de tus tamizajes realizados en Vida en Red.</p>
+  
+        @if (cargandoHistorial()) {
+          <p class="vacio">Cargando tu historial...</p>
+        } @else if (misEvaluaciones().length === 0) {
+          <p class="vacio">Aún no has guardado evaluaciones desde tu cuenta. Completa tu primer chequeo en la pestaña «Mi Bienestar».</p>
+        } @else {
+          <div class="lista-historial">
+            @for (ev of misEvaluaciones(); track ev.id) {
+              <div class="fila-historial">
+                <div>
+                  <strong>{{ ev.fechaCreacion | date:'dd/MM/yyyy · HH:mm' }}</strong>
+                  <span class="ciudad-tag">{{ ev.ciudad }}</span>
+                </div>
+                <div class="derecho-historial">
+                  <span class="puntaje-tag">{{ ev.puntuacionTotal }} / 15 pts</span>
+                  <span class="badge-riesgo" [class]="ev.nivelRiesgo.toLowerCase()">{{ ev.nivelRiesgo }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </section>
+    }
+  
+    @if (pestana() === 'ajustes') {
+      <div class="grid-dos-columnas">
+        <section class="tarjeta">
+          <h3>Información y Avatar</h3>
+          <form (ngSubmit)="guardarCambiosPerfil()" class="formulario">
+            <div class="campo">
+              <label>Elige tu ícono de perfil</label>
+              <div class="selector-avatares">
+                @for (av of avataresDisponibles; track av) {
+                  <button
+                    type="button"
+                    class="btn-avatar"
+                    [class.seleccionado]="editFoto === av"
+                    (click)="editFoto = av">
+                    {{ av }}
+                  </button>
+                }
+              </div>
+            </div>
+  
+            <div class="campo">
+              <label for="editNombre">Nombre o apodo</label>
+              <input id="editNombre" type="text" [(ngModel)]="editNombre" name="editNombre" required />
+            </div>
+  
+            <div class="campo">
+              <label for="editTelefono">Teléfono de contacto (SOS)</label>
+              <input id="editTelefono" type="tel" [(ngModel)]="editTelefono" name="editTelefono" />
+            </div>
+  
+            @if (mensajePerfil()) {
+              <div class="alerta-ok">{{ mensajePerfil() }}</div>
+            }
+  
+            <button type="submit" class="btn-enviar">Guardar cambios</button>
+          </form>
+        </section>
+  
+        <section class="tarjeta">
+          <h3>Seguridad y Contraseña</h3>
+          <form (ngSubmit)="actualizarClave()" class="formulario">
+            <div class="campo">
+              <label for="passActual">Contraseña actual</label>
+              <input id="passActual" type="password" [(ngModel)]="passwordActual" name="passActual" required />
+            </div>
+  
+            <div class="campo">
+              <label for="passNueva">Nueva contraseña</label>
+              <input id="passNueva" type="password" [(ngModel)]="passwordNueva" name="passNueva" required />
+            </div>
+  
+            @if (mensajePassword()) {
+              <div [class]="mensajePassword()!.tipo === 'ok' ? 'alerta-ok' : 'alerta-error'">
+                {{ mensajePassword()!.texto }}
+              </div>
+            }
+  
+            <button type="submit" class="btn-enviar">Actualizar contraseña</button>
+          </form>
+        </section>
+      </div>
+    }
+
+    @if (llamadaActiva()) {
+      <div class="overlay-llamada">
+        <div class="modal-llamada">
+          <span class="etiqueta-emergencia">ALERTA PREVENTIVA ACTIVADA · VIDA EN RED</span>
+  
+          <div class="circulo-pulso">
+            <span>📞</span>
+          </div>
+  
+          <h2>Línea 106 Tolima · Apoyo Psicológico</h2>
+          <p class="numero-destino">
+            Llamando a tu número: <strong>{{ authService.usuarioActual()?.telefono || 'Número registrado' }}</strong>
+          </p>
+  
+          @if (estadoLlamada() === 'timbrando') {
+            <p class="estado-llamada timbrando">Conectando llamada prioritaria...</p>
+          } @else {
+            <p class="estado-llamada conectada">En línea con profesional de escucha activa · {{ formatearTiempo(segundosLlamada()) }}</p>
+          }
+  
+          <p class="nota-simulacion">
+            *(Interfaz de demostración: en producción este módulo enlaza automáticamente con la central de atención en crisis de Ibagué).*
+          </p>
+  
+          <button type="button" class="btn-colgar" (click)="colgarLlamada()">
+            Finalizar llamada
+          </button>
+        </div>
+      </div>
+    }
+  </main>

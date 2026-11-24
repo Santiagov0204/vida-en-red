@@ -1,0 +1,285 @@
+.contenedor { max-width: 820px; margin: 2rem auto; padding: 0 1rem; color: #10375c; }
+
+/* Encabezado del usuario */
+.encabezado-perfil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  padding: 1.4rem 1.8rem;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(16, 55, 92, 0.05);
+  border: 1px solid rgba(29, 138, 153, 0.14);
+}
+
+.identidad-usuario { display: flex; align-items: center; gap: 1.1rem; }
+
+.avatar-circulo {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e3f4f1 0%, #ccebe6 100%);
+  border: 2px solid #2aa39c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  flex-shrink: 0;
+}
+
+.saludo-tag { font-size: 0.78rem; font-weight: 700; color: #1b6b7a; text-transform: uppercase; letter-spacing: 0.4px; }
+.identidad-usuario h1 { margin: 0.15rem 0; font-size: 1.45rem; color: #10375c; }
+.sub-info { margin: 0; font-size: 0.88rem; color: #5c7684; }
+
+.acciones-header { display: flex; gap: 0.6rem; }
+.btn-outline { padding: 0.55rem 1rem; border: 1px solid #bce3dc; background: #f4f9f9; color: #135d66; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.88rem; cursor: pointer; }
+.btn-salir { padding: 0.55rem 1rem; border: none; background: #fee2e2; color: #991b1b; border-radius: 10px; font-weight: 600; font-size: 0.88rem; cursor: pointer; }
+
+/* Pestañas */
+.nav-perfil { display: flex; gap: 0.6rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
+.nav-perfil button { padding: 0.65rem 1.2rem; border-radius: 999px; border: 1px solid #cbd9dc; background: #ffffff; color: #10375c; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.nav-perfil button.activa { background: linear-gradient(135deg, #164e78 0%, #2391a8 100%); color: #ffffff; border-color: transparent; }
+
+/* Tarjetas generales */
+.tarjeta { background: #ffffff; border-radius: 18px; padding: 1.8rem; box-shadow: 0 8px 28px rgba(16, 55, 92, 0.05); border: 1px solid rgba(29, 138, 153, 0.12); margin-bottom: 1.4rem; }
+.tarjeta h2, .tarjeta h3 { margin-top: 0; color: #10375c; }
+.descripcion-seccion { color: #5c7684; font-size: 0.92rem; margin-top: -0.4rem; margin-bottom: 1.3rem; }
+
+/* Frase motivadora */
+.tarjeta-frase { display: flex; justify-content: space-between; align-items: center; gap: 1rem; background: linear-gradient(135deg, #f0f9f8 0%, #e4f3f1 100%); border: 1px solid #bce3dc; flex-wrap: wrap; }
+.etiqueta-suave { font-size: 0.78rem; font-weight: 700; color: #1b6b7a; text-transform: uppercase; }
+.texto-frase { font-size: 1.12rem; font-style: italic; font-weight: 500; color: #10375c; margin: 0.35rem 0 0 0; }
+.btn-refrescar { padding: 0.5rem 0.95rem; background: #ffffff; border: 1px solid #bce3dc; border-radius: 10px; color: #135d66; font-weight: 600; cursor: pointer; }
+
+/* Encuesta */
+.bloque-pregunta { margin-bottom: 1.3rem; padding-bottom: 1.1rem; border-bottom: 1px solid #e6eceb; }
+.texto-pregunta { font-weight: 600; margin-bottom: 0.75rem; }
+.grupo-opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 0.5rem; }
+.btn-opcion { padding: 0.65rem; border: 1px solid #cbd9dc; background: #f9fbfb; color: #10375c; border-radius: 10px; cursor: pointer; }
+.btn-opcion.seleccionado { background: linear-gradient(135deg, #164e78 0%, #2391a8 100%); color: #ffffff; border-color: transparent; font-weight: 600; }
+.btn-enviar { width: 100%; padding: 0.95rem; background: linear-gradient(135deg, #164e78 0%, #2aa39c 100%); color: #ffffff; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+.btn-enviar:disabled { background: #a3b5bc; cursor: not-allowed; }
+.resultado-box { text-align: center; padding: 1rem; background: #f4f9f9; border-radius: 12px; }
+
+/* Artículos y líneas */
+.grid-dos-columnas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; }
+.item-articulo { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #e6eceb; }
+.item-articulo:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.tiempo-lectura { font-size: 0.76rem; color: #1b6b7a; font-weight: 700; }
+.item-articulo h4 { margin: 0.25rem 0 0.4rem 0; font-size: 1rem; }
+.item-articulo p { margin: 0 0 0.5rem 0; font-size: 0.88rem; color: #5c7684; line-height: 1.45; }
+.item-articulo a { font-size: 0.86rem; font-weight: 600; color: #164e78; text-decoration: none; }
+
+.lista-lineas { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+.lista-lineas li { background: #f4f9f9; padding: 0.9rem 1rem; border-radius: 10px; border-left: 4px solid #2aa39c; display: flex; flex-direction: column; gap: 0.2rem; }
+.lista-lineas span { font-size: 0.86rem; color: #5c7684; }
+
+/* Historial */
+.lista-historial { display: flex; flex-direction: column; gap: 0.7rem; }
+.fila-historial { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 1.1rem; background: #f9fbfb; border: 1px solid #e6eceb; border-radius: 12px; flex-wrap: wrap; gap: 0.5rem; }
+.ciudad-tag { margin-left: 0.6rem; font-size: 0.82rem; color: #5c7684; }
+.derecho-historial { display: flex; align-items: center; gap: 0.8rem; }
+.puntaje-tag { font-weight: 700; font-size: 0.92rem; }
+.badge-riesgo { padding: 0.28rem 0.75rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; display: inline-block; }
+.badge-riesgo.bajo { background: #dcfce7; color: #166534; }
+.badge-riesgo.medio { background: #fef9c3; color: #854d0e; }
+.badge-riesgo.alto { background: #fee2e2; color: #991b1b; }
+.vacio { text-align: center; color: #5c7684; padding: 1.5rem 0; }
+
+/* Ajustes */
+.formulario { display: flex; flex-direction: column; gap: 1rem; }
+.campo { display: flex; flex-direction: column; gap: 0.35rem; }
+.campo label { font-size: 0.88rem; font-weight: 600; }
+.campo input { padding: 0.7rem 0.85rem; border: 1px solid #cbd9dc; border-radius: 10px; background: #f9fbfb; }
+.selector-avatares { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn-avatar { width: 44px; height: 44px; border-radius: 50%; border: 2px solid #cbd9dc; background: #f9fbfb; font-size: 1.35rem; cursor: pointer; }
+.btn-avatar.seleccionado { border-color: #2391a8; background: #e3f4f1; transform: scale(1.08); }
+.alerta-ok { background: #dcfce7; color: #166534; padding: 0.7rem; border-radius: 8px; font-size: 0.88rem; }
+.alerta-error { background: #fef2f2; color: #b91c1c; padding: 0.7rem; border-radius: 8px; font-size: 0.88rem; }
+/* --- Condicional 1 encuesta/día --- */
+.caja-condicional-sos {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 14px;
+  padding: 1.6rem;
+  text-align: center;
+}
+
+.icono-alerta {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.caja-condicional-sos h3 {
+  margin: 0 0 0.5rem 0;
+  color: #92400e;
+}
+
+.caja-condicional-sos p {
+  color: #78350f;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  max-width: 540px;
+  margin: 0.4rem auto;
+}
+
+.pregunta-condicional {
+  font-size: 1.04rem !important;
+  color: #10375c !important;
+  margin-top: 1rem !important;
+}
+
+.botones-sos {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.btn-sos-si {
+  padding: 0.8rem 1.4rem;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28);
+  transition: transform 0.15s;
+}
+
+.btn-sos-si:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.btn-sos-no {
+  padding: 0.8rem 1.4rem;
+  background: #ffffff;
+  color: #135d66;
+  border: 1px solid #bce3dc;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mensaje-calma {
+  margin-top: 1rem !important;
+  font-weight: 600;
+  color: #166534 !important;
+  background: #dcfce7;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+}
+
+/* --- Modal de Llamada Simulada --- */
+.overlay-llamada {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 55, 92, 0.82);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-llamada {
+  background: #0f2942;
+  color: #ffffff;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 24px;
+  padding: 2.2rem 1.8rem;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(66, 194, 168, 0.35);
+}
+
+.etiqueta-emergencia {
+  display: inline-block;
+  background: rgba(220, 38, 38, 0.22);
+  color: #fca5a5;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.circulo-pulso {
+  width: 84px;
+  height: 84px;
+  margin: 1.5rem auto;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2aa39c 0%, #164e78 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  animation: pulsoLlamada 1.5s infinite;
+}
+
+@keyframes pulsoLlamada {
+  0% { box-shadow: 0 0 0 0 rgba(66, 194, 168, 0.7); }
+  70% { box-shadow: 0 0 0 22px rgba(66, 194, 168, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(66, 194, 168, 0); }
+}
+
+.modal-llamada h2 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.numero-destino {
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  margin: 0 0 1.2rem 0;
+}
+
+.estado-llamada {
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+}
+
+.estado-llamada.timbrando {
+  background: rgba(250, 204, 21, 0.15);
+  color: #fde047;
+}
+
+.estado-llamada.conectada {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.nota-simulacion {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 1.2rem 0 1.5rem 0;
+  line-height: 1.4;
+}
+
+.btn-colgar {
+  width: 100%;
+  padding: 0.9rem;
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-colgar:hover {
+  background: #b91c1c;
+}
